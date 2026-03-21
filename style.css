@@ -1,0 +1,1245 @@
+/* ========================= */
+/* RESET + ROOT */
+/* ========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-top: #050816;
+  --bg-bottom: #02030a;
+  --text: #f5f7ff;
+  --muted: rgba(245, 247, 255, 0.8);
+  --button: #cab8ff;
+  --button-text: #1e1833;
+  --card: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.18);
+  --pink: #ff8ba7;
+  --soft-glow: rgba(180, 155, 255, 0.22);
+}
+
+/* ========================= */
+/* GLOBAL PAGE STYLES */
+/* ========================= */
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 50% 60%, rgba(40, 63, 150, 0.2), transparent 32%),
+    radial-gradient(circle at 50% 100%, #08113a 0%, var(--bg-top) 35%, var(--bg-bottom) 80%);
+  color: var(--text);
+  overflow: hidden;
+  position: relative;
+}
+
+.app {
+  min-height: 100svh;
+  position: relative;
+}
+
+.scene {
+  display: none;
+  min-height: 100svh;
+  width: 100%;
+  position: relative;
+}
+
+.scene.active {
+  display: block;
+}
+
+.container {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero {
+  width: min(92vw, 430px);
+  text-align: center;
+  animation: fadeUp 1s ease;
+}
+
+.eyebrow {
+  text-transform: lowercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  color: rgba(245, 247, 255, 0.65);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: clamp(2rem, 7vw, 3.1rem);
+  line-height: 1.08;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 7vw, 2.8rem);
+  line-height: 1.08;
+  margin-bottom: 10px;
+}
+
+.moon-inline {
+  display: inline-block;
+  transform: translateY(2px);
+}
+
+.travel-subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.main-btn {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--button-text);
+  padding: 16px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(155, 127, 255, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.25s ease;
+}
+
+.main-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(155, 127, 255, 0.34);
+}
+
+.main-btn:active {
+  transform: scale(0.98);
+}
+
+.hidden-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+}
+
+.show-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.tiny-note {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: rgba(245, 247, 255, 0.55);
+}
+
+/* ========================= */
+/* STARS */
+/* ========================= */
+.stars,
+.stars::before,
+.stars::after,
+.travel-stars,
+.travel-stars::before,
+.travel-stars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+.global-stars {
+  z-index: 0;
+}
+
+.stars,
+.travel-stars {
+  opacity: 0.95;
+  background-image:
+    radial-gradient(2px 2px at 5% 14%, rgba(255,255,255,0.95), transparent 60%),
+    radial-gradient(2px 2px at 16% 24%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 30% 9%, rgba(255,255,255,0.95), transparent 60%),
+    radial-gradient(2px 2px at 43% 33%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(2px 2px at 58% 19%, rgba(255,255,255,0.95), transparent 60%),
+    radial-gradient(1.5px 1.5px at 71% 27%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(2px 2px at 82% 12%, rgba(255,255,255,0.95), transparent 60%),
+    radial-gradient(2px 2px at 90% 39%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 21% 68%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(2px 2px at 65% 74%, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1.5px 1.5px at 11% 45%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 35% 15%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(1.5px 1.5px at 55% 42%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(2px 2px at 76% 67%, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(1.5px 1.5px at 48% 5%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 8% 78%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(1.5px 1.5px at 92% 55%, rgba(255,255,255,0.88), transparent 60%),
+    radial-gradient(2px 2px at 62% 91%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 28% 52%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 74% 38%, rgba(255,255,255,0.92), transparent 60%);
+  animation: twinkleA 3.2s ease-in-out infinite alternate;
+}
+
+.stars::before,
+.travel-stars::before {
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 52%, rgba(194, 221, 255, 0.8), transparent 60%),
+    radial-gradient(2px 2px at 27% 48%, rgba(255,255,255,0.65), transparent 60%),
+    radial-gradient(2px 2px at 49% 56%, rgba(196, 181, 255, 0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 74% 58%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(2px 2px at 88% 66%, rgba(255,255,255,0.72), transparent 60%),
+    radial-gradient(1.5px 1.5px at 15% 35%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 42% 72%, rgba(194, 221, 255, 0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 62% 28%, rgba(255,255,255,0.9), transparent 60%),
+    radial-gradient(2px 2px at 19% 16%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 56% 71%, rgba(194, 221, 255, 0.85), transparent 60%),
+    radial-gradient(2px 2px at 81% 44%, rgba(255,255,255,0.78), transparent 60%),
+    radial-gradient(1.5px 1.5px at 38% 8%, rgba(255,255,255,0.82), transparent 60%);
+  animation:
+    driftStars 18s linear infinite,
+    twinkleB 2.4s ease-in-out infinite alternate;
+}
+
+.stars::after,
+.travel-stars::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 80%, rgba(255,255,255,0.65), transparent 60%),
+    radial-gradient(2px 2px at 36% 86%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 57% 88%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2px 2px at 78% 82%, rgba(255,255,255,0.65), transparent 60%),
+    radial-gradient(1.5px 1.5px at 22% 12%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(2px 2px at 67% 45%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(1.5px 1.5px at 44% 22%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(2px 2px at 9% 38%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 85% 65%, rgba(255,255,255,0.77), transparent 60%),
+    radial-gradient(2px 2px at 51% 61%, rgba(255,255,255,0.83), transparent 60%),
+    radial-gradient(1.5px 1.5px at 72% 14%, rgba(255,255,255,0.79), transparent 60%);
+  animation:
+    driftStars 26s linear infinite reverse,
+    twinkleC 1.8s ease-in-out infinite alternate;
+}
+
+/* ========================= */
+/* SCENE 1 */
+/* ========================= */
+.rocket-stage {
+  position: relative;
+  height: 320px;
+  margin: 10px 0 22px;
+  display: grid;
+  place-items: end center;
+}
+
+.rocket-wrap {
+  width: 170px;
+  position: relative;
+  z-index: 3;
+  transform-origin: center bottom;
+  animation: idleFloat 2.8s ease-in-out infinite alternate;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.rocket-emoji {
+  font-size: 7rem;
+  line-height: 1;
+  filter: drop-shadow(0 12px 24px rgba(107, 126, 255, 0.22));
+  animation: rocketBob 1.8s ease-in-out infinite alternate;
+}
+
+.emoji-fire {
+  position: relative;
+  width: 42px;
+  height: 52px;
+  margin-top: -4px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.emoji-fire span {
+  display: block;
+  width: 12px;
+  border-radius: 999px;
+  transform-origin: top center;
+  filter: blur(0.4px);
+}
+
+.emoji-fire span:nth-child(1) {
+  height: 34px;
+  background: linear-gradient(to bottom, #ffe07a, #ff9a3d, #ff5e57);
+  animation: flameFlicker1 0.18s infinite alternate;
+}
+
+.emoji-fire span:nth-child(2) {
+  width: 14px;
+  height: 48px;
+  background: linear-gradient(to bottom, #fff1a8, #ffb347, #ff6b4a);
+  animation: flameFlicker2 0.14s infinite alternate;
+}
+
+.emoji-fire span:nth-child(3) {
+  height: 34px;
+  background: linear-gradient(to bottom, #ffe07a, #ff9a3d, #ff5e57);
+  animation: flameFlicker3 0.16s infinite alternate;
+}
+
+.side-rocket {
+  position: absolute;
+  right: 22px;
+  top: 26%;
+  width: 130px;
+  height: auto;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: sideFloat 3.5s ease-in-out infinite alternate;
+}
+
+.side-rocket .rocket-emoji {
+  font-size: 3.2rem;
+}
+
+.side-rocket-fire {
+  margin-top: -4px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.side-rocket-fire span {
+  display: block;
+  width: 8px;
+  border-radius: 999px;
+  transform-origin: top center;
+  filter: blur(0.3px);
+  height: 24px;
+  background: linear-gradient(to bottom, #fff1a8, #ffb347, #ff6b4a);
+  animation: flameFlicker2 0.14s infinite alternate;
+}
+
+@keyframes sideFloat {
+  from {
+    transform: translateY(0) translateX(0) rotate(-2deg);
+  }
+  to {
+    transform: translateY(-16px) translateX(-8px) rotate(2deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .side-rocket {
+    right: 14px;
+    top: 22%;
+    transform: scale(0.9);
+  }
+}
+
+body.launching .rocket-wrap {
+  animation: launch 2.1s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+
+body.launching .main-btn {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ========================= */
+/* SCENE 2 */
+/* ========================= */
+.moon-scene {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  background:
+    radial-gradient(circle at 15% 35%, rgba(150, 100, 200, 0.15), transparent 25%),
+    radial-gradient(circle at 85% 60%, rgba(100, 150, 200, 0.12), transparent 22%),
+    radial-gradient(circle at 78% 20%, rgba(252, 239, 183, 0.08), transparent 18%),
+    radial-gradient(circle at 50% 100%, #08113a 0%, #050816 38%, #02030a 82%);
+}
+
+.rabbit-moon {
+  position: absolute;
+  top: 78px;
+  right: 24px;
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff7dd, #ddd2b0 72%);
+  box-shadow: 0 0 36px rgba(255, 236, 167, 0.22), inset -8px -10px 0 rgba(201, 186, 146, 0.24);
+  animation: moonGlow 3s ease-in-out infinite alternate;
+}
+
+.ear {
+  position: absolute;
+  top: -26px;
+  width: 28px;
+  height: 52px;
+  background: #efe2bf;
+  border-radius: 999px;
+  box-shadow: inset 0 -8px 0 rgba(210, 193, 151, 0.35);
+}
+
+.ear-left {
+  left: 24px;
+  transform: rotate(-18deg);
+}
+
+.ear-right {
+  right: 24px;
+  transform: rotate(18deg);
+}
+
+.moon-face {
+  position: absolute;
+  inset: 0;
+}
+
+.moon-eye {
+  position: absolute;
+  top: 48px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #625642;
+}
+
+.moon-eye.left {
+  left: 40px;
+}
+
+.moon-eye.right {
+  right: 40px;
+}
+
+.moon-mouth {
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  width: 24px;
+  height: 12px;
+  transform: translateX(-50%);
+  border-bottom: 4px solid #766951;
+  border-radius: 0 0 24px 24px;
+}
+
+.landed-rocket {
+  position: absolute;
+  left: 32px;
+  bottom: 145px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: landedBounce 2.5s ease-in-out infinite alternate;
+}
+
+.landed-rocket-emoji {
+  font-size: 4.8rem;
+  line-height: 1;
+  filter: drop-shadow(0 10px 22px rgba(107, 126, 255, 0.16));
+}
+
+.landed-fire {
+  position: relative;
+  width: 28px;
+  height: 36px;
+  margin-top: -2px;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.landed-fire span {
+  display: block;
+  border-radius: 999px;
+  transform-origin: top center;
+}
+
+.landed-fire span:nth-child(1) {
+  width: 8px;
+  height: 20px;
+  background: linear-gradient(to bottom, #ffe07a, #ff9a3d, #ff5e57);
+  animation: flameFlicker1 0.18s infinite alternate;
+}
+
+.landed-fire span:nth-child(2) {
+  width: 10px;
+  height: 28px;
+  background: linear-gradient(to bottom, #fff1a8, #ffb347, #ff6b4a);
+  animation: flameFlicker2 0.14s infinite alternate;
+}
+
+.landed-fire span:nth-child(3) {
+  width: 8px;
+  height: 20px;
+  background: linear-gradient(to bottom, #ffe07a, #ff9a3d, #ff5e57);
+  animation: flameFlicker3 0.16s infinite alternate;
+}
+
+.moon-ground {
+  position: absolute;
+  left: -10%;
+  bottom: -50px;
+  width: 120%;
+  height: 180px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255,255,255,0.08), transparent 30%),
+    linear-gradient(to bottom, #766da1, #524a77 55%, #3b3556);
+  box-shadow: inset 0 14px 24px rgba(255, 255, 255, 0.06);
+}
+
+.moon-content {
+  position: relative;
+  z-index: 5;
+  width: min(92vw, 430px);
+  text-align: center;
+  animation: fadeUp 1s ease;
+  margin-top: 20px;
+  padding-right: 0px;
+}
+
+.moon-content::-webkit-scrollbar {
+  display: none;
+}
+
+.moon-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.moon-content::-webkit-scrollbar-thumb {
+  background: rgba(202, 184, 255, 0.4);
+  border-radius: 3px;
+}
+
+.moon-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(202, 184, 255, 0.6);
+}
+
+
+
+.note-card {
+  margin: 0 auto 22px;
+  width: min(100%, 340px);
+  max-height: 40vh;
+  overflow-y: auto;
+  padding: 18px 18px 16px;
+  border-radius: 22px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+.note-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.note-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.note-card::-webkit-scrollbar-thumb {
+  background: rgba(202, 184, 255, 0.4);
+  border-radius: 3px;
+}
+
+.note-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(202, 184, 255, 0.6);
+}
+
+.note-title {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: rgba(245, 247, 255, 0.65);
+  margin-bottom: 10px;
+}
+
+.note-text {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.hidden-item {
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  pointer-events: none;
+}
+
+.show-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  pointer-events: auto;
+}
+
+/* ========================= */
+/* MOON SCENE PLANETS & COMETS */
+/* ========================= */
+.moon-planet {
+  display: none;
+}
+
+.moon-crescent {
+  position: absolute;
+  top: 8%;
+  right: 5%;
+  font-size: 2.2rem;
+  z-index: 2;
+  animation: moonCrescentGlow 4s ease-in-out infinite;
+}
+
+.planet-emoji {
+  position: absolute;
+  top: 15%;
+  left: 12%;
+  font-size: 2rem;
+  z-index: 2;
+  animation: planetFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes moonCrescentGlow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(255, 200, 124, 0.6));
+  }
+}
+
+@keyframes planetFloat {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(-15px) rotate(10deg);
+  }
+}
+
+.moon-comet {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  top: 25%;
+  right: 20%;
+  background: radial-gradient(circle, #ffffff, rgba(255, 255, 255, 0));
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), -2px -2px 12px rgba(255, 255, 255, 0.6);
+  animation: moonCometTrail 4s ease-in infinite;
+}
+
+.moon-comet::before {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  top: 0;
+  right: 2px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 50%;
+}
+
+@keyframes moonPlanetFloat {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-15px) scale(1.05);
+  }
+}
+
+@keyframes moonCometTrail {
+  from {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(80px, 80px);
+    opacity: 0;
+  }
+}
+
+.comet-two {
+  top: 45%;
+  right: 15%;
+  animation: moonCometTrail 5s ease-in infinite 1.5s;
+}
+
+.comet-three {
+  top: 60%;
+  left: 18%;
+  animation: moonCometTrailReverse 4.5s ease-in infinite 0.8s;
+}
+
+@keyframes moonCometTrailReverse {
+  from {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(-80px, -80px);
+    opacity: 0;
+  }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  font-size: 0.8rem;
+  z-index: 2;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle-one {
+  top: 12%;
+  left: 8%;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle-two {
+  top: 8%;
+  right: 12%;
+  animation: sparkleFloat 4s ease-in-out infinite 0.5s;
+}
+
+.sparkle-three {
+  bottom: 20%;
+  left: 15%;
+  font-size: 0.7rem;
+  animation: sparkleFloat 3.5s ease-in-out infinite 1s;
+}
+
+.sparkle-four {
+  bottom: 15%;
+  right: 8%;
+  animation: sparkleFloat 4s ease-in-out infinite 1.5s;
+}
+
+.sparkle-five {
+  top: 35%;
+  right: 25%;
+  animation: sparkleFloat 3.5s ease-in-out infinite 0.8s;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.2);
+  }
+}
+
+/* ========================= */
+/* SCENE 3 */
+/* ========================= */
+.spacewalk-scene {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(90, 90, 170, 0.15), transparent 24%),
+    radial-gradient(circle at 80% 70%, rgba(144, 104, 255, 0.12), transparent 20%),
+    linear-gradient(to bottom, #040611, #02030a 76%);
+}
+
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0.2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planet-one {
+  width: 78px;
+  height: 78px;
+  top: 90px;
+  left: 30px;
+  font-size: 3.5rem;
+  opacity: 0.9;
+}
+
+.planet-two {
+  width: 46px;
+  height: 46px;
+  right: 44px;
+  bottom: 170px;
+  font-size: 2.2rem;
+  opacity: 0.85;
+}
+
+.princess-wavy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(520px, 85vw);
+  max-width: 90vw;
+  height: auto;
+  z-index: 2;
+  animation: idleFloat 3s ease-in-out infinite alternate;
+}
+
+@media (max-width: 768px) {
+  .spacewalk-scene,
+  .moon-scene,
+  .container,
+  .app {
+    min-height: 100vh;
+    padding: 12px;
+  }
+
+  .spacewalk-scene {
+    padding: 16px 10px;
+    background: linear-gradient(to bottom, #040611, #02030a 76%);
+  }
+
+  .planet-one {
+    width: 58px;
+    height: 58px;
+    top: 10vh;
+    left: 10px;
+    font-size: 2.5rem;
+  }
+
+  .planet-two {
+    width: 36px;
+    height: 36px;
+    right: 18px;
+    bottom: 120px;
+    font-size: 1.8rem;
+  }
+
+  .princess-wavy {
+    width: min(320px, 70vw);
+    animation: idleFloat 2.5s ease-in-out infinite alternate;
+  }
+
+  .astronaut-wrap {
+    width: 140px;
+    height: 140px;
+    top: 15%;
+    left: 15%;
+  }
+
+  .main-btn {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+}
+
+
+.astronaut-wrap {
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 190px;
+  height: 190px;
+  z-index: 3;
+  animation: driftAstronaut 7s ease-in-out infinite;
+}
+
+.astronaut-tether {
+  position: absolute;
+  top: 85px;
+  left: 88px;
+  width: 110px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(255,255,255,0.55), rgba(255,255,255,0.05));
+  transform: rotate(18deg);
+  transform-origin: left center;
+}
+
+.astronaut {
+  position: absolute;
+  top: 50px;
+  left: 40px;
+  font-size: 4.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 12px 22px rgba(255,255,255,0.08));
+  animation: astronautSpin 6s ease-in-out infinite alternate;
+}
+
+.spacewalk-copy {
+  position: relative;
+  z-index: 5;
+  width: min(92vw, 430px);
+  text-align: center;
+  animation: fadeUp 1s ease;
+  margin-top: 240px;
+}
+
+/* ========================= */
+/* SCENE 4 */
+/* ========================= */
+.closeout-hero {
+  width: min(92vw, 520px);
+}
+
+.closeout-text {
+  margin-top: 18px;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.closeout-sparkles {
+  margin-top: 26px;
+  font-size: 1.5rem;
+  letter-spacing: 0.35em;
+  animation: sparklePulse 2.4s ease-in-out infinite;
+}
+
+/* ========================= */
+/* ANIMATIONS */
+/* ========================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes idleFloat {
+  from {
+    transform: translate(-55%, -50%) translateY(0) translateX(0) scale(1) rotate(-2deg);
+  }
+  to {
+    transform: translate(-50%, -45%) translateY(-30px) translateX(-20px) scale(1.02) rotate(3deg);
+  }
+}
+
+@keyframes rocketBob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes flameFlicker1 {
+  from {
+    transform: scaleY(0.82) scaleX(0.95);
+    opacity: 0.85;
+  }
+  to {
+    transform: scaleY(1.1) scaleX(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes flameFlicker2 {
+  from {
+    transform: scaleY(0.9) scaleX(0.92);
+    opacity: 0.9;
+  }
+  to {
+    transform: scaleY(1.18) scaleX(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes flameFlicker3 {
+  from {
+    transform: scaleY(0.78) scaleX(0.94);
+    opacity: 0.82;
+  }
+  to {
+    transform: scaleY(1.04) scaleX(1.06);
+    opacity: 0.98;
+  }
+}
+
+@keyframes twinkleA {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+}
+
+@keyframes twinkleB {
+  0% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes twinkleC {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes driftStars {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(40px);
+  }
+}
+
+@keyframes launch {
+  0% {
+    transform: translateY(0) rotate(-2deg) scale(1);
+    opacity: 1;
+  }
+  10% {
+    transform: translateY(-8px) rotate(2deg) scale(1.02);
+  }
+  18% {
+    transform: translateY(6px) rotate(-2deg) scale(1.01);
+  }
+  28% {
+    transform: translateY(-22px) rotate(2deg) scale(1.03);
+  }
+  45% {
+    transform: translateY(-80px) rotate(0deg) scale(1.03);
+  }
+  70% {
+    transform: translateY(-230px) scale(0.95);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-540px) scale(0.78);
+    opacity: 0;
+  }
+}
+
+@keyframes moonGlow {
+  from {
+    box-shadow: 0 0 24px rgba(255, 236, 167, 0.16), inset -8px -10px 0 rgba(201, 186, 146, 0.24);
+  }
+  to {
+    box-shadow: 0 0 42px rgba(255, 236, 167, 0.28), inset -8px -10px 0 rgba(201, 186, 146, 0.24);
+  }
+}
+
+@keyframes landedBounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes flowerSway {
+  from {
+    transform: translateY(0) rotate(-4deg);
+  }
+  to {
+    transform: translateY(-6px) rotate(4deg);
+  }
+}
+
+@keyframes driftAstronaut {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(28px, -20px);
+  }
+  50% {
+    transform: translate(54px, 12px);
+  }
+  75% {
+    transform: translate(18px, 34px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes astronautSpin {
+  0% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+  100% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes sparklePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+@media (max-width: 420px) {
+  .rocket-stage {
+    height: 300px;
+  }
+
+  .rocket-wrap {
+    width: 155px;
+  }
+
+  .rocket-emoji {
+    font-size: 6rem;
+  }
+
+  .main-btn {
+    width: 100%;
+  }
+
+/* ========================= */
+/* REAL MOON IMAGE */
+/* ========================= */
+.moon-real {
+  position: absolute;
+  top: 70px;
+  right: 28px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  /* soft glow */
+  box-shadow:
+    0 0 40px rgba(255, 255, 255, 0.12),
+    0 0 80px rgba(180, 200, 255, 0.08);
+
+  animation: moonFloat 5s ease-in-out infinite alternate;
+}
+
+.moon-real img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* soften contrast slightly so it blends */
+  filter: brightness(1.1) contrast(0.95);
+}
+
+/* floating motion */
+@keyframes moonFloat {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+  .ear {
+    width: 24px;
+    height: 44px;
+    top: -22px;
+  }
+
+  .moon-eye {
+    top: 43px;
+  }
+
+  .moon-mouth {
+    top: 63px;
+  }
+
+  .landed-rocket {
+    left: 18px;
+    bottom: 132px;
+  }
+
+  .landed-rocket-emoji {
+    font-size: 4.1rem;
+  }
+
+  .flowers {
+    font-size: 2.2rem;
+    gap: 10px;
+  }
+
+  .astronaut-wrap {
+    left: 8%;
+    top: 15%;
+    transform: scale(0.9);
+  }
+
+  .spacewalk-copy {
+    margin-top: 270px;
+  }
+
+  .closeout-text {
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+}
