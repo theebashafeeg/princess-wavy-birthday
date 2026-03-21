@@ -815,8 +815,8 @@ body.launching .main-btn {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(520px, 85vw);
-  max-width: 90vw;
+  width: min(600px, 90vw);
+  max-width: 95vw;
   height: auto;
   z-index: 2;
   animation: idleFloat 3s ease-in-out infinite alternate;
@@ -948,10 +948,10 @@ body.launching .main-btn {
 
 @keyframes idleFloat {
   from {
-    transform: translate(-55%, -50%) translateY(0) translateX(0) scale(1) rotate(-2deg);
+    transform: translate(-60%, -50%) translateY(0) translateX(0) scale(1) rotate(-3deg);
   }
   to {
-    transform: translate(-50%, -45%) translateY(-30px) translateX(-20px) scale(1.02) rotate(3deg);
+    transform: translate(-40%, -45%) translateY(-50px) translateX(-40px) scale(1.05) rotate(4deg);
   }
 }
 
