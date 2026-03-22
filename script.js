@@ -4,6 +4,7 @@
 const launchBtn = document.getElementById("launchBtn");
 const toFloatBtn = document.getElementById("toFloatBtn");
 const toCloseBtn = document.getElementById("toCloseBtn");
+const restartBtn = document.getElementById("restartBtn");
 
 const scene1 = document.getElementById("scene1");
 const scene2 = document.getElementById("scene2");
@@ -26,8 +27,10 @@ function showScene(sceneToShow) {
 
 function revealMoonItems() {
   setTimeout(() => {
-    flowers.classList.remove("hidden-item");
-    flowers.classList.add("show-item");
+    if (flowers) {
+      flowers.classList.remove("hidden-item");
+      flowers.classList.add("show-item");
+    }
   }, 700);
 
   setTimeout(() => {
@@ -73,3 +76,19 @@ toFloatBtn.addEventListener("click", () => {
 toCloseBtn.addEventListener("click", () => {
   showScene(scene4);
 });
+
+if (restartBtn) {
+  restartBtn.addEventListener("click", () => {
+    showScene(scene1);
+
+    toCloseBtn.classList.add("hidden-btn");
+    toCloseBtn.classList.remove("show-btn");
+    toFloatBtn.classList.add("hidden-btn");
+    toFloatBtn.classList.remove("show-btn");
+
+    noteCard.classList.add("hidden-item");
+    noteCard.classList.remove("show-item");
+
+    launchBtn.disabled = false;
+  });
+}
